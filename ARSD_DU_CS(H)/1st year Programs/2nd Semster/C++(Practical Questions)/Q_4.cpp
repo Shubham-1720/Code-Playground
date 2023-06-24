@@ -24,7 +24,24 @@ void concatenate_string(void)
     s3 = s1 + s2;
     cout << "Concatenated string is: " << s3 << endl;
 }
+// function to compare two strings
+void compare_Strings(void){
+    string str1, str2;
+    cout<<"Enter the both the strings"<<endl;
+    cin>>str1;
+    cin>>str2;
+    if(str1==str2){
+        cout<<"Both strings are equal"<<endl;
+    }
+    else if(str1>str2){
+        cout<<"str1 is bigger"<<endl;
+        
+    }
+    else if(str1<str2){
+        cout<<"str2 is bigger"<<endl;
 
+    }
+}
 // function to convert lowercase in upparcase
 void lower_upper(void)
 {
@@ -126,7 +143,7 @@ int main()
     else if (choice
         == 3)
         {
-            cout << "hey" << endl;
+            compare_Strings();
         }
     else if (choice
         == 4)

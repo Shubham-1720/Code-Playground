@@ -4,6 +4,11 @@ using namespace std;
 int main()
 {   int size = 10;
     int array[10] = {2,2,2,3,3,4,5,4,6,4};
+    cout<<"Array before removing duplicates: ";
+    for(int i=0; i<size;i++){
+        cout<<array[i]<<" ";
+    }
+    cout<<endl;
     for (int i=0; i<size-1; i++){
       for(int j=i+1; j<size;){
         if (array[i]==array[j]){
@@ -17,6 +22,7 @@ int main()
         }
       }
     }
+    
     cout<<"Array after removing duplicates: ";
     for(int i=0; i<size;i++){
         cout<<array[i]<<" ";

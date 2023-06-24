@@ -38,7 +38,7 @@ int main(){
         if(((s1>0) and (s2>0) and (s3>0)) and ((s1+s2)>s3 and (s2+s3)>s1 and (s1+s3)>s2)){
             Triangle set1;
             Triangle set2;
-            set2.area_calc(s1,s2);
+            // set2.area_calc(s1,s2);
 
             set1.area_calc(s1,s2,s3);
         }

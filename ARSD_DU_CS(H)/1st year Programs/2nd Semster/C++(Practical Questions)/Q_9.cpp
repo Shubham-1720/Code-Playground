@@ -6,12 +6,12 @@ class Person
 
 public:
     string name;
-    virtual void setData(void)
+    void setData(void)
     {
         cout<<"Enter your name: "<<endl;
         cin>>name;
     }
-    virtual  void display(void)
+    void display(void)
     {
         cout << "Your name is: " << name << endl;
     }

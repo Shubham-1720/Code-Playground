@@ -14,7 +14,7 @@ int main(){
     }
     for(int i = 1; i<=smaller; i++){
         if(int1%i==0 and int2%i==0){
-            GCD = smaller;
+            GCD = i;
         }
     }
     cout<<"GCD of entered number is: "<<GCD<<endl;

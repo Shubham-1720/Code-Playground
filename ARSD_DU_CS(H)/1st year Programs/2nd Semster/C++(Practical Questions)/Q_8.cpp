@@ -135,6 +135,6 @@ int main(){
     Matrix set1;
     // set1.sumMatrix();
     // set1.productMatrix();
-    // set1.transposeMatrix();
+    set1.transposeMatrix();
     return 0;
 }
