@@ -29,7 +29,7 @@ class RELATION:
     def anti_symmetric(self):
         for i in range(0, len(self.matrix)):
             for j in range(0, len(self.matrix)):
-                if self.matrix[i][j]==1 and self.matrix[j][i]==1 and i!=j:
+                if (self.matrix[i][j] == self.matrix[j][i]) and i!=j:
                     print("Entered Matrix is not anti-symmetric")
                     return False
         print("Entered matrix is anti-symmetric")

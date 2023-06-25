@@ -1,20 +1,25 @@
 import itertools
 
-
-def permute(digits, repetittion = False):
-    if repetittion:
-        values = itertools.permutations(digits, len(digits))
+def generate_permutations(digits, repeat=False):
+    if repeat:
+        permutations = itertools.product(digits, repeat=len(digits))
     else:
-        values = itertools.permutations(digits)
+        permutations = itertools.permutations(digits)
+    
+    for permutation in permutations:
+        print('(',','.join(permutation) , ')', end=" ")
+    print()
 
-    for value in values:
-        print(''.join(map(str,value)))
 
 
+print("Enter the number of digit you want to enter: ")
+n = int(input(""))
+list = []
+for i in range(1, n+1):
+    data = input(f"Enter the {1} value: ")
+    list.append(data)
+print("Permutations without repetition:")
+generate_permutations(list, repeat=False)
 
-digit = [1,2,3]
-print("with repetitons")
-permute(digit,repetittion=True)
-
-print("without repetitons")
-permute(digit)
+print("\nPermutations with repetition:")
+generate_permutations(list, repeat=True)

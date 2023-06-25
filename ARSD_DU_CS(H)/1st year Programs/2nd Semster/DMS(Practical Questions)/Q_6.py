@@ -1,18 +1,14 @@
 #this is program will check whether the graph is complete or not and and 
 #also represent the adjacency matrix associated to it
 
-def check_completeness_graph(list):
-    for i in list:
-        for j in i:
-            if i!=j and j!=1:
+def check_completeness_graph(list,vertices):
+    for i in range(vertices):
+        for j in range(vertices):
+            if i!=j and list[i][j]!=1:
                 print("Entered graph is not complete")
                 return False
     print("Entered graph is complete graph")
-    print("Adjacency matrix of the graph is")
-    print(list)
     return True
-
-
 
 
 
@@ -26,7 +22,9 @@ def main():
             value = int(input())
             list.append(value)
         matrix.append(list)
-    check_completeness_graph(matrix)
+    check_completeness_graph(matrix,vertices)
+    print("Adjacency matrix of the graph is")
+    print(matrix)
 
 
 if __name__=='__main__':

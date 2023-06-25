@@ -11,9 +11,6 @@ def check_completeness_graph(list,vertices):
     return True
 
 
-
-
-
 def main():
     vertices = int(input("Enter the number of vertices you want: "))
     matrix = []

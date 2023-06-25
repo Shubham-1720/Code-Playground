@@ -11,7 +11,7 @@ def degree(graph, vertices):
 
     print("Vertex       In-degree       Out-degree")
     for i in range(0,len(graph)):
-        print(f"{i+1}\t\t{in_degree[i]}\t\t{out_degree[i]}")
+        print(f"  {i+1}\t\t{in_degree[i]}\t\t{out_degree[i]}")
 
 
 def main():
