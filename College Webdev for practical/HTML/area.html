@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Converter</title>
+    <link rel="stylesheet" href="/CSS/stylearea.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="accessibility_logo_cont">
+            <span id="menu_bar">
+                <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+            </span>
+            <span class="logo">Area Converter</span>
+
+            <span id="accessibility" title="accessibility"><i class="fa fa-universal-access fa-2x"
+                    aria-hidden="true"></i>
+            </span></div>
+        <nav class="main_menu">
+            <ul>
+                <li class="active"><a href="/home">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        
+    </header>
+    <main>
+        <div class="converter-box">
+            <div>
+
+                <div class="input-box"><label for="">Value</label><input type="number" name="" id="value"></div>
+                <div class="input-box">
+                    <label for="">From</label>
+                    <select name="" id="a1">
+                      <option value="sqkm"><i class="fas fa-flag"></i> km² - Square Kilometer</option>
+                      <option value="sqm"><i class="fas fa-flag"></i> m² - Square Meter</option>
+                      <option value="ha"><i class="fas fa-flag"></i> ha - Hectare</option>
+                      <option value="acre"><i class="fas fa-flag"></i> acre - Acre</option>
+                      <option value="sqmi"><i class="fas fa-flag"></i> mi² - Square Mile</option>
+                      <option value="sqyd"><i class="fas fa-flag"></i> yd² - Square Yard</option>
+                      <option value="sqft"><i class="fas fa-flag"></i> ft² - Square Foot</option>
+                      <option value="sqin"><i class="fas fa-flag"></i> in² - Square Inch</option>
+                      <!-- Add more options for other units if needed -->
+                    </select>
+                  </div>
+                  
+                  <div class="input-box">
+                    <label for="">From</label>
+                    <select name="" id="a2">
+                      <option value="sqkm"><i class="fas fa-flag"></i> km² - Square Kilometer</option>
+                      <option value="sqm"><i class="fas fa-flag"></i> m² - Square Meter</option>
+                      <option value="ha"><i class="fas fa-flag"></i> ha - Hectare</option>
+                      <option value="acre"><i class="fas fa-flag"></i> acre - Acre</option>
+                      <option value="sqmi"><i class="fas fa-flag"></i> mi² - Square Mile</option>
+                      <option value="sqyd"><i class="fas fa-flag"></i> yd² - Square Yard</option>
+                      <option value="sqft"><i class="fas fa-flag"></i> ft² - Square Foot</option>
+                      <option value="sqin"><i class="fas fa-flag"></i> in² - Square Inch</option>
+                      <!-- Add more options for other units if needed -->
+                    </select>
+                  </div>
+                  
+                    <div class="area-converter-popup popup">
+                        <p></p>
+                        <button class="">
+                            Convert Again
+                        </button>
+                    </div>
+            </div>
+            <button class="convert-btn">
+                Start Converting...
+            </button>
+        </div>
+    </main>
+<script src="/JAVASCRIPT/area.js"></script>
+</body>
+
+</html>
