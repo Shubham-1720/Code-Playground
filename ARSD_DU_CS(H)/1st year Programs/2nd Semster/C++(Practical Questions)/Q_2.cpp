@@ -2,8 +2,8 @@
 using namespace std;
 
 int main()
-{   int size = 10;
-    int array[10] = {2,2,2,3,3,4,5,4,6,4};
+{   int size = 5;
+    int array[5] = {2,3,2,3,5};
     cout<<"Array before removing duplicates: ";
     for(int i=0; i<size;i++){
         cout<<array[i]<<" ";
@@ -16,6 +16,7 @@ int main()
             array[k]=array[k+1];
              }
              size = size-1;
+             cout<<size<<endl;
         }
         else{
             j++;

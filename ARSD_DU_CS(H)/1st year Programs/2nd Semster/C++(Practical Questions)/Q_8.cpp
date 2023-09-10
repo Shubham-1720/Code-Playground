@@ -28,7 +28,7 @@ void Matrix::sumMatrix(){
     int matrix2[row][column];
     int data2;
     for(int i = 0; i<row; i++){
-        for (int j=0 ;j < column; j++) {
+        for (int j=0; j < column; j++) {
             cout<< "enter element at "<<i+1 <<","<<j+1 <<" : "<<endl;
             cin>>data2;
             matrix2[i][j]= data2;
