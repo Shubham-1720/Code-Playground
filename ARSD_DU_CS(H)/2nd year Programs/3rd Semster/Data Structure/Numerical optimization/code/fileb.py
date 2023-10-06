@@ -1,0 +1,22 @@
+import numpy as np
+m = int(input("Enter "))
+n = int(input("Enter "))
+arr = np.random.randint(0,10, size=(m,n))
+print(arr)
+
+#shape
+print()
+print("Shape: ")
+print(arr.shape)
+print()
+print("Size: ")
+print(arr.size)
+print()
+print("Change m and n to n and m: ")
+print(arr.T)
+print()
+print("Data type: ")
+print(arr.dtype)
+print()
+print("Type: ")
+print(type(arr))
