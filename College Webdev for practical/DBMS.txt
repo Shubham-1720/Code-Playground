@@ -1,0 +1,748 @@
+-- --DBMS First Question all queries. 
+
+ 
+-- 1. Retrieve names of students enrolled in any society. 
+
+    select distinct(studentName) as studentName_enrolled_in_society from student 
+
+    join enrollment as e on e.rollNo = student.rollNo 
+
+    join society as sc on sc.socID = e.socID; 
+
+ 
+ 
+
+-- 2. Retrieve all society names. 
+
+    select socName from society; 
+
+ 
+ 
+
+-- 3. Retrieve students' names starting with letter ‘A’. 
+
+    select  studentName from student  
+
+    where studentName like 'A%' ; 
+
+ 
+ 
+
+-- 4. Retrieve students' details studying in courses ‘computer science’ or ‘chemistry’. 
+
+    select * from student 
+
+    where course = 'CS' or course = 'Chemistry'; 
+
+ 
+ 
+
+-- 5. Retrieve students’ names whose roll no either starts with ‘X’ or ‘Z’ and ends with ‘9’ 
+
+    --not used in our dataset as our roll number is like this '100001' 
+
+    select  studentName from student 
+
+    where rollNo like  'X%' or rollNo like 'Z%' and rollNo like '%9'; 
+
+ 
+ 
+
+-- 6. Find society details with more than N TotalSeats where N is to be input by the user 
+
+    SET  @num=5; --run this first then run next line 
+
+    Select * from society where totalSeats >@num; 
+
+ 
+ 
+
+-- 7. Update society table for mentor name of a specific society 
+
+    update  society  
+
+    set mentorName='Mr.Nitish'  
+
+    where socName='NSS'; 
+
+ 
+ 
+
+-- 8. Find society names in which more than five students have enrolled 
+
+    select socName from society 
+
+    join enrollment as e on e.socID = society.socID 
+
+    group by socName 
+
+    having count(socName)>3; --having more than 3 students. i have less data therefore i used 3 instead of 5. 
+
+ 
+ 
+
+-- 9. Find the name of youngest student enrolled in society ‘NSS’ 
+
+    select studentName from student 
+
+    join enrollment as e on e.rollNo = student.rollNo 
+
+    join society as s on s.socID = e.socID 
+
+    where socName = 'NSS' 
+
+    order by (DOB) DESC 
+
+    limit 1; 
+
+ 
+ 
+
+-- 10. Find the name of most popular society (on the basis of enrolled students) 
+
+    select socName from society 
+
+    join enrollment as e on e.socID = society.socID 
+
+    join student as st on st.rollNo = e.rollNo 
+
+    group by socName 
+
+    order by COUNT(socName) desc 
+
+    limit 1; 
+
+ 
+ 
+
+-- 11. Find the name of two least popular societies (on the basis of enrolled students) 
+
+    select socName from society 
+
+    join enrollment as e on e.socID = society.socID 
+
+    join student as st on st.rollNo = e.rollNo 
+
+    group by socName 
+
+    order by COUNT(socName) asc 
+
+    limit 2; 
+
+ 
+ 
+
+-- 12. Find the student names who are not enrolled in any society 
+
+    select studentName from student 
+
+    left join enrollment e on e.rollNo=student.rollNo 
+
+    where e.rollNo is null; 
+
+    --alternate query 
+
+    select studentName from student 
+
+    where studentName not in (select studentName from student,enrollment where student.rollNo=enrollment.rollNo); 
+
+ 
+ 
+
+-- 13. Find the student names enrolled in at least two societies 
+
+    select studentName from student,enrollment 
+
+    where enrollment.rollNo = student.rollNo 
+
+    group by studentName 
+
+    having count(studentName)>3; 
+
+ 
+ 
+
+-- 14. Find society names in which maximum students are enrolled 
+
+    select socName from society 
+
+    join enrollment e on socID=socID 
+
+    group by socName 
+
+    order by(count(socName)) DESC; 
+
+ 
+ 
+
+-- 15. Find names of all students who have enrolled in any society and society names in which at least one student has enrolled 
+
+    --first all students names 
+
+    SELECT distinct(studentName) from student 
+
+    JOIN enrollment e on  e.rollNo=student.rollNo; 
+
+    --society names in which at least a studetn is enrollwd 
+
+    SELECT DISTINCT(socName) from society 
+
+    JOIN enrollment e on e.socID=society.socID; 
+
+ 
+ 
+
+-- 16. Find names of students who are enrolled in any of the three societies ‘Debating(Blitz)’, ‘Dancing(Advaita)’ and ‘Sashakt(Founders)’. 
+
+    SELECT DISTINCT(studentName) from student,enrollment as e,society 
+
+    WHERE student.rollNo=e.rollNo AND e.socID=society.socID AND (socName="Blitz" or socName="Advaita" or socName="Founders");
+
+-- 17. Find society names such that its mentor has a name with ‘Gupta’ in it. 
+
+    SELECT socName from society 
+
+    where mentorName like '%Gupta%'; 
+
+ 
+ 
+
+-- 18. Find the society names in which the number of enrolled students is only 10% of its capacity. 
+
+    select society.socName from society 
+
+    join ( select socName, count(enrollment.rollNo) as enrolled from society  join enrollment on enrollment.socID=society.socID group by socName) as new on new.socName=society.socName 
+
+    where new.enrolled >= (0.1)*totalSeats; 
+
+ 
+ 
+
+-- 19. Display the vacant seats for each society. 
+
+    select society.socName,(society.totalSeats - new.enrolled) as vacant_seats  from society 
+
+    join ( select socName, count(enrollment.rollNo) as enrolled from society  join enrollment on enrollment.socID=society.socID group by socName) as new on new.socName=society.socName; 
+
+ 
+ 
+
+-- 20. Increment Total Seats of each society by 10% 
+
+    update society set totalSeats=totalSeats + 0.1*totalSeats; 
+
+ 
+ 
+
+-- 21. Add the enrollment fees paid (‘yes’/’No’) field in the enrollment table. 
+
+    ALTER  TABLE enrollment ADD COLUMN enrollment_fess_paid VARCHAR(3); 
+
+ 
+ 
+
+-- 22. Update date of enrollment of society id ‘s1’ to ‘2018-01-15’, ‘s2’ to current date and ‘s3’ to ‘2018-01-02’. 
+
+    Set @currDate = CURRENT_DATE();--SETTING A VARIBALE TO STORE CURRENT DATE 
+
+    update enrollment 
+
+    Set DOE = 
+
+    Case socID 
+
+    WHEN "S00001" THEN "2018-01-15" 
+
+    WHEN "S00002" THEN @currDate 
+
+    WHEN "S00003" THEN "2018-01-02" 
+
+    END 
+
+    WHERE socID IN ("S00001","S00002","S00003"); 
+
+ 
+
+-- 23. Create a view to keep track of society names with the total number of students enrolled in it. 
+
+    create view no_of_enrollments_in_society as 
+
+    select society.socName,count(enrollment.rollNo) as enrolled_students from society 
+
+    Natural join enrollment 
+
+    group by socName; 
+
+ 
+
+-- 24. Find student names enrolled in all the societies. 
+
+    SET @no_of_societies= (SELECT COUNT(*) FROM society); --run this first to find no. of societies in our Database 
+
+    select studentName from 
+
+    (select *,count(enrollment.socID) as societies_enrolled from student Natural join enrollment group by studentName) as enrolled 
+
+    where societies_enrolled=@no_of_societies; 
+
+ 
+-- 25. Count the number of societies with more than 5 students enrolled in it 
+
+    select count(*) from 
+
+    (select count(enrollment.rollNo) as enrolled from society Natural Join enrollment group by society.socName) as new 
+
+    where enrolled>5; 
+
+ 
+ 
+
+-- 26. Add column Mobile number in student table with default value ‘9999999999’ 
+
+    ALTER TABLE student ADD COLUMN mobileNumber INT DEFAULT '999999999'; 
+
+ 
+
+-- 27. Find the total number of students whose age is > 20 years. 
+
+    select count(*) from 
+
+    (select timestampdiff(year,DOB,current_date()) as age from student) as new 
+
+    where age>20 
+
+ 
+ 
+
+-- 28. Find names of students who are born in 2001 and are enrolled in at least one society. 
+
+    select studentName from student,enrollment 
+
+    where student.rollNo = enrollment.rollNo and DOB like "%2001%"; 
+
+ 
+ 
+
+-- 29. Count all societies whose name starts with ‘S’ and ends with ‘t’ and at least 5 students are enrolled in the society. 
+
+    select count(socName) from 
+
+    (select socName,count(enrollment.rollNo) as enrolled_student_count from society,enrollment 
+
+    where society.socID=enrollment.socID 
+
+    group by socName) as new 
+
+    where enrolled_student_count>5 and socName like "S%t"; 
+
+ 
+ 
+
+-- 30. Display the following information: Society name Mentor name Total Capacity Total Enrolled Unfilled Seats 
+
+    select socName,mentorName,totalSeats,enrolled,(totalSeats-enrolled)  
+
+    from (select *,count(enrollment.rollNo) as enrolled from society 
+
+    Natural Join enrollment group by socName) as new_enrolled;
+
+--Creating Database Company 
+
+  CREATE DATABASE company; 
+
+ 
+ 
+
+--to connect to database in command line client  
+
+  USE company; 
+
+ 
+ 
+
+--Creating Tables in Company  Database. 
+
+ 
+ 
+
+--1. Creating employee Table 
+
+  create Table employee( 
+
+  fname varchar(15) not null, 
+
+  minit char, 
+
+  lname varchar(15) not null, 
+
+  ssn char(9) not null, 
+
+  DOB Date, 
+
+  address varchar(30), 
+
+  sex char, 
+
+  salary Decimal(10,2), 
+
+  super_ssn char(9), 
+
+  dnumber int not null, 
+
+  primary key(ssn) 
+
+  ); 
+
+ 
+ 
+
+--2. Creating department Table 
+
+  create table department( 
+
+  dname varchar(15) not null, 
+
+  dnumber int not null, 
+
+  mgr_ssn char(9) not null, 
+
+  mgr_start_date Date, 
+
+  primary key(dnumber), 
+
+  unique(dname), 
+
+  foreign key(mgr_ssn) references employee(ssn) 
+
+  ); 
+
+ 
+ 
+
+--3. Creating Dept_Location Table 
+
+  create table dept_locations( 
+
+  dnumber int not null, 
+
+  dlocation varchar(15), 
+
+  primary key(dnumber,dlocation), 
+
+  foreign key(dnumber) references department(dnumber) 
+
+  ); 
+
+ 
+ 
+
+--4. Creating Project Table 
+
+  create table project( 
+
+  pname varchar(15), 
+
+  pnumber int, 
+
+  plocation varchar(15), 
+
+  dnumber int, 
+
+  primary key(pnumber), 
+
+  unique(pname), 
+
+  foreign key(dnumber) references department(dnumber) 
+
+  ); 
+
+ 
+ 
+
+--5. Creating Works_on Table 
+
+  create table works_on( 
+
+  ssn char(9) not null, 
+
+  pnumber int not null, 
+
+  hours decimal(3,1) not null, 
+
+  primary key(ssn,pnumber), 
+
+  foreign key(ssn) references employee(ssn), 
+
+  foreign key(pnumber) references project(pnumber) 
+
+  ); 
+
+ 
+ 
+
+--6 Creating Dependent Table 
+
+  create table dependent( 
+
+  ssn char(9), 
+
+  dependent_name varchar(15), 
+
+  sex char, 
+
+  DOB date, 
+
+  relationship varchar(8), 
+
+  primary key(ssn,dependent_name), 
+
+  foreign key(ssn) references employee(ssn) 
+
+  ); 
+
+ 
+ 
+
+-- Insert data into EMPLOYEE table 
+
+INSERT INTO employee 
+
+VALUES 
+
+('John', 'B', 'Smith', '123456789', '1965-01-09', '731 Fondren, Houston, TX', 'M', 30000, '333445555', 5), 
+
+('Franklin', 'T', 'Wong', '333445555', '1955-12-08', '638 Voss, Houston, TX', 'M', 40000, '888665555', 5), 
+
+('Alicia', 'J', 'Zelaya', '999887777', '1968-01-19', '3321 Castle, Spring, TX', 'F', 25000, '333445555', 4), 
+
+('Jennifer', 'S', 'Wallace', '987654321', '1941-06-20', '291 Berry, Bellaire, TX', 'F', 43000, '888665555', 4), 
+
+('Ramesh', 'K', 'Narayan', '666884444', '1962-09-15', '975 Fire Oak, Humble, TX', 'M', 38000, '333445555', 5), 
+
+('Joyce', 'A', 'English', '453453453', '1972-07-31', '5631 Rice, Houston, TX', 'F', 55000, NULL, 1), 
+
+('Ahmad', 'V', 'Jabbar', '987987987', '1969-03-29', '980 Dallas, Houston, TX', 'M', 25000, '888665555', 4), 
+
+('James', 'E', 'Borg', '888665555', '1937-11-10', '450 Stone, Houston, TX', 'M', 25000, '333445555', 5); 
+
+ 
+ 
+ 
+
+-- Insert data into department table 
+
+INSERT INTO department 
+
+VALUES 
+
+('Research', 5, '333445555', '1988-05-22'), 
+
+('Administration', 4, '987654321', '1995-01-01'), 
+
+('Headquarters', 1, '888665555', '1981-06-19'); 
+
+ 
+ 
+
+-- Insert data into DEPT_LOCATIONS table 
+
+INSERT INTO dept_locations 
+
+VALUES 
+
+(1, 'Houston'), 
+
+(5, 'Houston'), 
+
+(5, 'Sugarland'), 
+
+(5, 'Bellaire'), 
+
+(4, 'Stafford'); 
+
+ 
+ 
+
+-- Insert data into WORKS_ON table 
+
+INSERT INTO works_on 
+
+VALUES 
+
+('123456789', 1, 32.567), 
+
+('123456789', 2, 7.5), 
+
+('666884444', 3, 40.0), 
+
+('453453453', 1, 20.0), 
+
+('453453453', 2, 20.0), 
+
+('333445555', 2, 10.0), 
+
+('333445555', 3, 10.0), 
+
+('333445555', 10, 10.0), 
+
+('333445555', 20, 10.0), 
+
+('333445555', 30, 30.0), 
+
+('987654321', 30, 5.0), 
+
+('987654321', 20, 15.0); 
+
+ 
+ 
+
+-- Insert data into PROJECT table 
+
+INSERT INTO project 
+
+VALUES 
+
+('ProductX', 1, 'Bellaire', 5), 
+
+('ProductY', 2, 'Sugarland', 5), 
+
+('ProductZ', 3, 'Houston', 5), 
+
+('Computerization', 10, 'Stafford', 4), 
+
+('Reorganization', 20, 'Houston', 1), 
+
+('Newbenefits', 30, 'Stafford', 5); 
+
+ 
+ 
+
+-- Insert data into DEPENDENT table 
+
+INSERT INTO dependent 
+
+VALUES 
+
+('333445555', 'Alice', 'F', '1986-04-05', 'Daughter'), 
+
+('333445555', 'Theodore', 'M', '1983-10-25', 'Son'), 
+
+('333445555', 'Joy', 'F', '1958-05-03', 'Spouse'),
+
+('987654321', 'Abner', 'M', '1942-02-28', 'Spouse'), 
+
+('123456789', 'Michael', 'M', '1988-01-04', 'Son'), 
+
+('123456789', 'Alice', 'F', '1988-12-30', 'Daughter'), 
+
+('888665555', 'Elizabeth', 'F', '1967-05-05', 'Spouse'); 
+
+ 
+
+ 
+
+ 
+
+  --Queries Executed on Company DataBase from Chapter-7 of Book 
+
+ 
+ 
+
+  --1. Retrieve the names of all employees who do not have supervisors. 
+
+  SELECT fname,lname 
+
+  FROM employee 
+
+  WHERE super_ssn IS NULL; 
+
+ 
+ 
+
+  --2. 
+
+  SELECT DISTINCT pnumber 
+
+  FROM project 
+
+  WHERE pnumber IN 
+
+    ( SELECT pnumber 
+
+    FROM project, department, employee 
+
+    WHERE project.dnumber = department.dnumber AND 
+
+    mgr_ssn = ssn AND lname = 'Smith' ) 
+
+  OR 
+
+  pnumber IN 
+
+    ( SELECT pnumber 
+
+    FROM works_on, employee 
+
+    WHERE works_on.ssn = employee.ssn AND lname = 'Smith' ); 
+
+ 
+ 
+
+  --3.  Retrieve the name of each employee who has a dependent with the same first name and is the same sex as the employee. 
+
+  SELECT fname,lname from employee,dependent 
+
+  WHERE dependent.ssn=employee.ssn AND dependent.sex = employee.sex; 
+
+ 
+
+ 
+--4. Retrieve the names of employees who have no dependents. 
+
+  select fname,lname from employee 
+
+  where employee.ssn not in (select employee.ssn from employee,dependent where employee.ssn=dependent.ssn); 
+
+ 
+ 
+
+ --5. List the names of managers who have at least one dependent 
+
+  SELECT fname,lname from employee 
+
+  WHERE  
+
+  EXISTS (SELECT * FROM department WHERE employee.ssn =department.mgr_ssn)  
+
+  AND 
+
+  EXISTS (SELECT * FROM dependent WHERE employee.ssn = dependent.ssn); 
+
+ 
+ 
+
+  --6. Retrieve the name of each employee who works on all the projects controlled by department number 5  
+
+  SELECT fname,lname from employee 
+
+ WHERE NOT EXISTS (  
+
+  (  
+
+  SELECT pnumber 
+
+  FROM project 
+
+  WHERE project.dnumber = 5 
+
+  ) 
+
+ EXCEPT (  
+
+ SELECT pnumber 
+
+ FROM works_on 
+
+ WHERE employee.ssn = works_on.ssn)  
+
+ );
