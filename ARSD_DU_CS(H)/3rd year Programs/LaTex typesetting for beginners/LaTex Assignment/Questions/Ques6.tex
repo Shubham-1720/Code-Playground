@@ -1,0 +1,71 @@
+\newpage
+\raggedright
+\setcounter{section}{0}
+\section*{Question:6 \\ Explain the following command.}
+\textbf{Answer:-}
+\section{fontmatter:- }
+\begin{itemize}
+    \item \textbf{Purpose:}  The "fontmatter" command is used to switch to a specific font setting that is typically used in the main content of the document, such as chapters, sections, and text. It's usually used in the context of the book document class.
+    \item Example:-
+    \begin{verbatim}
+        \frontmatter
+        % Front matter content (e.g., title, preface, table of contents)
+        \fontmatter
+        % Main matter content (e.g., chapters, sections)
+
+    \end{verbatim}
+\end{itemize}
+
+\section{mainmatter:- }
+\begin{itemize}
+    \item \textbf{Purpose:}  This command starts the main body of the document. It is typically used after "frontmatter" (if present). It activates the numbering style for the main content, such as using Arabic numerals for chapters and sections.
+    \item Example:-
+    \begin{verbatim}
+        \frontmatter
+        \tableofcontents
+        \mainmatter
+        \chapter{Introduction}
+    \end{verbatim}
+\end{itemize}
+
+\section{backmatter:- }
+\begin{itemize}
+    \item \textbf{Purpose:} This command marks the end of the main content and is used to format the back portion of the document, which usually includes appendices, bibliographies, and indexes. In a book, for example, the back matter is the section that follows the main chapters.
+    \item Example:-
+    \begin{verbatim}
+        \mainmatter
+        \chapter{Conclusion}
+        \backmatter
+        \bibliography{references}
+        \appendixx
+    \end{verbatim}
+\end{itemize}
+
+
+\section{include:- }
+\begin{itemize}
+    \item \textbf{Purpose:} The "include" command is used to insert the content of an external .tex file into the current document. It is commonly used in large documents to split the document into smaller, manageable files (such as one per chapter).
+    \item Example:-
+    \begin{verbatim}
+        \include{chapter1} % Includes the contents of chapter1.tex
+        \include{chapter2} % Includes the contents of chapter2.tex
+    \end{verbatim}
+\end{itemize}
+
+
+
+\section{includeonly:- }
+\begin{itemize}
+    \item \textbf{Purpose:}The "includeonly" command is used to specify which files should be included in the current compilation. This is useful when working with large documents to compile only specific chapters or sections at a time, which can save time and resources.
+    \item Example:-
+    \begin{verbatim}
+        \includeonly{chapter1,chapter3} % Only includes chapter1.tex and chapter3.tex
+        \include{chapter1}
+        \include{chapter2}
+        \include{chapter3}
+    \end{verbatim}
+\end{itemize}
+
+\vspace{2cm}
+\centering
+\textbf{This is end of assignment Question 7 is automatically done. Have a good day!!!}

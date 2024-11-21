@@ -1,0 +1,39 @@
+\newpage
+\section*{Question:4 \\ Write the LaTex command to produce following table.}
+\textbf{Answer:-}
+LaTex command to produce tables.\\
+\textbf{(i)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\multicolumn{4}{|c|}{\textbf{List of topper students}} \\
+\hline
+Course & Student Name & Position & Percentage \\
+\hline
+\multirow{2}{*}{B.Sc. (Hons.)}  & Shubham Kushwaha & 1st & 9.18 \\
+\cline{2-4} & Rajveer Singh & Unknown & 7.55 \\
+\hline
+\end{tabular}
+\caption{List of topper Students}
+\end{table}
+
+\textbf{(ii)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+\multicolumn{2}{|c|}{} & \multicolumn{4}{|c|}{Number of Students} & \multicolumn{1}{|c|}{Total}\\
+\cline{3-6}
+\multicolumn{2}{|c|}{} & B.Sc(H) & B.Sc(P) & B.A(H) & B.A(P) & \multicolumn{1}{|c|}{}\\ 
+\hline
+\multirow{2}{*}{Class} & \romannumeral 1 & 15 & 17 & 18 & 18 & 69 \\
+\cline{2-7} & \romannumeral 2 & 10 & 10 & 10 & 10 & 40 \\
+\hline
+\multicolumn{2}{|c|}{Total} & 25 & 27 & 28 & 28 & 109 \\
+\hline
+\end{tabular}
+\caption{Number of student in different courses}
+\end{table}

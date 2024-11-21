@@ -1,0 +1,98 @@
+\newpage
+\section*{Question:1.1 \\ What is LaTex?}
+\textbf{Answer:-} LaTeX is a high-quality typesetting system widely used for creating documents that involve complex formatting, especially in academic, technical, and scientific fields. It is based on the \textbf{TeX} typesetting system, designed by Donald Knuth, and is often preferred for its precision and ability to handle complex layouts.
+
+\section*{Question:2.2 \\ What do you mean by hypertext link. Write a command to insert hypertext link in latex.
+}
+\textbf{Answer:-} A \textbf{hypertext link} is a clickable text or object in a document that redirects the user to another location, such as a webpage, a section within the same document, or an external file. In LaTeX, you can create hypertext links in your document using the hyperref package, which enables hyperlinks in PDFs.\\
+\begin{itemize}
+    \item For linking Webpages:-
+    \href{https://www.youtube.com}{\textcolor{blue}{Click here to visit YouTube}}
+    \item For Mail link:-
+    \href{mailto:28090@arsd.du.ac.in}{\textcolor{blue}{I am learning Latex.}}
+    
+\end{itemize}
+
+\section*{Question:1.3 \\ Write a command to insert image in latex.}
+\textbf{Answer:-} To insert image in latex document we use \textit{“graphicx”} package.
+
+\begin{itemize}
+    \item Package need to include:-
+    \begin{verbatim}
+    \usepackage{graphicx}
+    \end{verbatim}
+    \vspace{1cm}
+    \item Basic command:-
+    \begin{verbatim}
+    \includegraphics[options]{filename}
+    \end{verbatim}    
+\end{itemize}
+
+
+\section*{Question:1.4 \\ What is difference between hfill and vfill?}
+\textbf{Answer:-} Both are used to add flexible space in the document.
+
+\begin{table}[h!]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\textbf{hfill} & \textbf{vfill} \\
+\hline
+Add horizontal  space in the document. & Add vertical space in the document. \\
+\hline
+Pushes content to the left, right, or center in the \textbf{horizontal direction}. &
+Pushes content to the top, bottom, or center in the \textbf{vertical direction}. \\
+\hline
+Typically used in inline text or when arranging elements on the same line.
+&
+Used to position content on a page or adjust spacing between vertical elements. \\
+\hline
+\end{tabular}
+}
+\caption{Difference between hfill and vfill}
+\end{table}
+
+\section*{Question:1.5 \\ What is the role of geometry package.}
+\textbf{Answer:-} The \textit{geometry} package in LaTeX allows us to customize the layout of our document by adjusting page dimensions and margins. It provides a flexible and simple way to control the page size, margins, headers, footers, and other layout properties without manually redefining commands.
+
+\section*{Question:1.6 \\ What does \textbf{"noindent"} command do in latex?}
+\textbf{Answer:-} \textbf{"noindent"} command in latex prevent auto indentation of the first line of the paragraph.
+By default, latex indents first of every new paragraph.
+
+\section*{Question:1.7 \\ Write the syntax for generating index for a document in latex. Illustrate with example.}
+\textbf{Answer:-} To generate index in latex we use makeidx package it will allow us to mark word for the inclusion and generate index automatically.
+
+\begin{itemize}
+    \item Package need to include:-
+    \begin{verbatim}
+    \include{makeidx}
+    \makeindex
+    \end{verbatim}
+
+    \item Command use to include whatever term we want in index:-
+    \begin{verbatim}
+    \index{shubham}
+    \index{LaTex}
+    \end{verbatim}
+
+    \item Command to be use to make the index where ever we want:-
+    \begin{verbatim}
+    \printindex
+    \end{verbatim}
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
